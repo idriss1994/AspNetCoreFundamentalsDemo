@@ -4,7 +4,10 @@ var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddRazorPages();
-builder.Services.AddScoped<IMyDependency, MyDependency2>();
+
+// Register groups of services with extension custom methods
+builder.Services.AddMyDependencyGroup()
+    .AddConfig(builder.Configuration);
 
 var app = builder.Build();
 

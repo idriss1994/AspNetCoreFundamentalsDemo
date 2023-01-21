@@ -1,6 +1,6 @@
 ﻿namespace AspNetCoreFundamentalsDemo
 {
-    public class MyDependency2 : IMyDependency
+    public class MyDependency2 : IMyDependency2
     {
         private readonly ILogger<MyDependency2> _logger;
 
