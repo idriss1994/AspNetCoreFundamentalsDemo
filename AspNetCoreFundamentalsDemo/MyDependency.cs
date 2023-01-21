@@ -1,6 +1,6 @@
 ﻿namespace AspNetCoreFundamentalsDemo
 {
-    public class MyDependency
+    public class MyDependency : IMyDependency
     {
         public void WriteMessage(string message)
         {

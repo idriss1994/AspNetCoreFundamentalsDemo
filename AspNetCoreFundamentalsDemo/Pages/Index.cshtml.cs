@@ -6,11 +6,12 @@ namespace AspNetCoreFundamentalsDemo.Pages
     public class IndexModel : PageModel
     {
         private readonly ILogger<IndexModel> _logger;
-        private readonly MyDependency _myDependency = new MyDependency();
+        private readonly IMyDependency _myDependency;
 
-        public IndexModel(ILogger<IndexModel> logger)
+        public IndexModel(ILogger<IndexModel> logger, IMyDependency myDependency)
         {
             _logger = logger;
+            _myDependency = myDependency;
         }
 
         public void OnGet()
