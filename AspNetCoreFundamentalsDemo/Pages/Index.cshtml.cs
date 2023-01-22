@@ -1,4 +1,6 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using AspNetCoreFundamentalsDemo.Services;
+using AspNetCoreFundamentalsDemo.Services.Interfaces;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 
 namespace AspNetCoreFundamentalsDemo.Pages
@@ -6,26 +8,23 @@ namespace AspNetCoreFundamentalsDemo.Pages
     public class IndexModel : PageModel
     {
         private readonly ILogger<IndexModel> _logger;
-        private readonly IOperationTransient _operationTransient;
-        private readonly IOperationScoped _operationScoped;
-        private readonly IOperationSingleton _operationSingleton;
+        private readonly Service1 service1;
+        private readonly Service2 service2;
+        private readonly IService3 service3;
 
-        public IndexModel(ILogger<IndexModel> logger,
-            IOperationTransient operationTransient,
-            IOperationScoped operationScoped,
-            IOperationSingleton operationSingleton)
+        public IndexModel(ILogger<IndexModel> logger, Service1 service1, Service2 service2, IService3 service3)
         {
             _logger = logger;
-            _operationTransient = operationTransient;
-            _operationScoped = operationScoped;
-            _operationSingleton = operationSingleton;
+            this.service1 = service1;
+            this.service2 = service2;
+            this.service3 = service3;
         }
 
         public void OnGet()
         {
-            _logger.LogInformation($"Transient: {_operationTransient.OperationId}");
-            _logger.LogInformation($"Scoped: {_operationScoped.OperationId}");
-            _logger.LogInformation($"Singleton: {_operationSingleton.OperationId}");
+            service1.Write("IndexModel.OnGet");
+            service2.Write("IndexModel.OnGet");
+            service3.Write("IndexModel.OnGet");
         }
     }
 }

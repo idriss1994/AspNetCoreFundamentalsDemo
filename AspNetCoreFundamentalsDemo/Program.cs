@@ -1,4 +1,6 @@
 using AspNetCoreFundamentalsDemo;
+using AspNetCoreFundamentalsDemo.Services;
+using AspNetCoreFundamentalsDemo.Services.Interfaces;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -12,6 +14,12 @@ builder.Services.AddMyDependencyGroup()
 builder.Services.AddTransient<IOperationTransient, Operation>();
 builder.Services.AddScoped<IOperationScoped, Operation>();
 builder.Services.AddSingleton<IOperationSingleton, Operation>();
+
+builder.Services.AddScoped<Service1>();
+builder.Services.AddSingleton<Service2>();
+
+var myKey = builder.Configuration["MyKey"];
+builder.Services.AddSingleton<IService3>(sp => new Service3(myKey));
 
 
 var app = builder.Build();
