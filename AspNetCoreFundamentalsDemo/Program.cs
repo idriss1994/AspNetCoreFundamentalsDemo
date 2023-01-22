@@ -16,6 +16,14 @@ builder.Services.AddSingleton<IOperationSingleton, Operation>();
 
 var app = builder.Build();
 
+// Resolve a service at app start up
+using (var scope = app.Services.CreateScope())
+{
+    var serviceProvider = scope.ServiceProvider;
+    var myDependency = serviceProvider.GetRequiredService<IMyDependency>();
+    myDependency.WriteMessage("Call service form main");
+}
+
 // Configure the HTTP request pipeline.
 if (!app.Environment.IsDevelopment())
 {
