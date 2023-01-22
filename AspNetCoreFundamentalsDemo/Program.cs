@@ -15,8 +15,9 @@ builder.Services.AddTransient<IOperationTransient, Operation>();
 builder.Services.AddScoped<IOperationScoped, Operation>();
 builder.Services.AddSingleton<IOperationSingleton, Operation>();
 
-builder.Services.AddScoped<Service1>();
-builder.Services.AddSingleton<Service2>();
+// Services not created by the service container:
+builder.Services.AddSingleton(new Service1());
+builder.Services.AddSingleton(new Service2());
 
 var myKey = builder.Configuration["MyKey"];
 builder.Services.AddSingleton<IService3>(sp => new Service3(myKey));
