@@ -9,6 +9,11 @@ builder.Services.AddRazorPages();
 builder.Services.AddMyDependencyGroup()
     .AddConfig(builder.Configuration);
 
+builder.Services.AddTransient<IOperationTransient, Operation>();
+builder.Services.AddScoped<IOperationScoped, Operation>();
+builder.Services.AddSingleton<IOperationSingleton, Operation>();
+
+
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
@@ -22,6 +27,8 @@ if (!app.Environment.IsDevelopment())
 app.UseHttpsRedirection();
 app.UseStaticFiles();
 
+// Custom middleware
+app.UseMyMiddleware();
 app.UseRouting();
 
 app.UseAuthorization();
